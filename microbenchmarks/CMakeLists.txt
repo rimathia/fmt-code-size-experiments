@@ -1,0 +1,26 @@
+add_executable(copybenchmark copy.cpp)
+target_link_libraries(copybenchmark benchmark::benchmark)
+
+add_executable(usefmtbenchmark_directpushback usefmt.cpp)
+target_link_libraries(usefmtbenchmark_directpushback benchmark::benchmark usefmt_directpushback)
+
+add_executable(usefmtbenchmark_erasedbuffer usefmt.cpp)
+target_link_libraries(usefmtbenchmark_erasedbuffer benchmark::benchmark usefmt_erasedbuffer)
+
+add_executable(usefmtbenchmark_erasedpushback usefmt.cpp)
+target_link_libraries(usefmtbenchmark_erasedpushback benchmark::benchmark usefmt_erasedpushback)
+
+add_executable(usefmtbenchmark_singlealloc usefmt.cpp)
+target_link_libraries(usefmtbenchmark_singlealloc benchmark::benchmark usefmt_singlealloc)
+
+add_executable(useprintfbenchmark_directpushback useprintf.cpp)
+target_link_libraries(useprintfbenchmark_directpushback benchmark::benchmark usefmt_directpushback)
+
+add_executable(useprintfbenchmark_erasedbuffer useprintf.cpp)
+target_link_libraries(useprintfbenchmark_erasedbuffer benchmark::benchmark usefmt_erasedbuffer)
+
+add_executable(useprintfbenchmark_erasedpushback useprintf.cpp)
+target_link_libraries(useprintfbenchmark_erasedpushback benchmark::benchmark usefmt_erasedpushback)
+
+add_executable(useprintfbenchmark_singlealloc useprintf.cpp)
+target_link_libraries(useprintfbenchmark_singlealloc benchmark::benchmark usefmt_singlealloc)

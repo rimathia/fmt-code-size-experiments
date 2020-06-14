@@ -1,0 +1,4 @@
+add_library(usefmt_singlealloc usefmt.cpp include/usefmt/usefmt.h)
+target_include_directories(usefmt_singlealloc PUBLIC include)
+target_link_libraries(usefmt_singlealloc PUBLIC fmt)
+target_link_libraries(usefmt_singlealloc PUBLIC nonstdstring)

@@ -1,0 +1,4 @@
+add_library(usefmt_erasedpushback usefmt.cpp include/usefmt/usefmt.h)
+target_include_directories(usefmt_erasedpushback PUBLIC include)
+target_link_libraries(usefmt_erasedpushback PUBLIC fmt)
+target_link_libraries(usefmt_erasedpushback PUBLIC nonstdstring)

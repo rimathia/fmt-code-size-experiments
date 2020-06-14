@@ -14,24 +14,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory(fmt)
 
-add_library(nonstdstring nonstdstring.cpp include/nonstdstring/nonstdstring.h)
-target_include_directories(nonstdstring PUBLIC include)
-target_link_libraries(nonstdstring PUBLIC fmt)
+add_subdirectory(benchmark)
 
-add_library(runtimecheck STATIC runtimecheck.cpp)
-target_link_libraries(runtimecheck PUBLIC nonstdstring)
+add_subdirectory(nonstdstring)
 
-add_executable(useruntimecheck useruntimecheck.cpp)
-target_link_libraries(useruntimecheck runtimecheck)
+add_subdirectory(usefmt_directpushback)
+add_subdirectory(usefmt_erasedbuffer)
+add_subdirectory(usefmt_erasedpushback)
+add_subdirectory(usefmt_singlealloc)
 
-add_library(compiletimecheck STATIC compiletimecheck.cpp)
-target_link_libraries(compiletimecheck PUBLIC nonstdstring)
-
-add_executable(usecompiletimecheck usecompiletimecheck.cpp)
-target_link_libraries(usecompiletimecheck compiletimecheck)
-
-add_executable(usefmt usefmt.cpp)
-target_link_libraries(usefmt nonstdstring)
-
-add_executable(useprintf useprintf.cpp)
-target_link_libraries(useprintf nonstdstring)
+add_subdirectory(microbenchmarks)
+add_subdirectory(examples)
