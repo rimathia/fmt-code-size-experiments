@@ -17,11 +17,12 @@ nonstdstring fmt(const S& format_string, const Args&... args);
 template <typename... Args>
 nonstdstring printf(fmt::string_view format_string, const Args&... args);
 
-using backit = std::back_insert_iterator<fmt::memory_buffer>;
+using cont = fmt::basic_format_context<
+    std::back_insert_iterator<fmt::detail::buffer<char>>, char>;
 
-using cont = fmt::basic_format_context<backit, char>;
-
-using printf_cont = fmt::basic_printf_context<backit, char>;
+using printf_cont =
+    fmt::basic_printf_context<std::back_insert_iterator<fmt::memory_buffer>,
+                              char>;
 
 nonstdstring internal_vformat(fmt::string_view format_string,
                               fmt::basic_format_args<cont> format_args);
