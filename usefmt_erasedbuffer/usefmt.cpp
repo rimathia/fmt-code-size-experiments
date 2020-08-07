@@ -5,7 +5,9 @@ namespace usefmt {
 nonstdstring internal_vformat(fmt::string_view format_string,
                               fmt::basic_format_args<cont> format_args) {
   fmt::memory_buffer buf;
-  fmt::vformat_to(std::back_inserter(buf), format_string, format_args);
+  using af =
+      fmt::detail::arg_formatter<decltype(std::back_inserter(buf)), char>;
+  fmt::vformat_to<af>(std::back_inserter(buf), format_string, format_args);
   return nonstdstring(buf.data(), buf.size());
 }
 

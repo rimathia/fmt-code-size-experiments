@@ -1,0 +1,2 @@
+add_executable(memory_buffer_basic_test basic.cpp)
+target_link_libraries(memory_buffer_basic_test memory_buffer gtest gtest_main )

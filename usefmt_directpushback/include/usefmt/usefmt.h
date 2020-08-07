@@ -7,28 +7,30 @@
 
 namespace usefmt {
 template <typename... Args>
-nonstdstring fmt(fmt::string_view format_string, const Args&... args) {
+nonstdstring fmt(fmt::string_view format_string, Args&&... args) {
   nonstdstring s;
-  fmt::format_to(std::back_inserter(s), format_string, args...);
+  fmt::format_to(std::back_inserter(s), format_string,
+                 std::forward<Args>(args)...);
   return s;
 }
 
 template <
     typename S, typename... Args,
     typename = std::enable_if_t<std::is_base_of<fmt::compile_string, S>::value>>
-nonstdstring fmt(const S& format_string, const Args&... args) {
+nonstdstring fmt(const S& format_string, Args&&... args) {
   nonstdstring s;
-  fmt::format_to(std::back_inserter(s), format_string, args...);
+  fmt::format_to(std::back_inserter(s), format_string,
+                 std::forward<Args>(args)...);
   return s;
 }
 
 template <typename... Args>
-nonstdstring printf(fmt::string_view format_string, const Args&... args) {
+nonstdstring printf(fmt::string_view format_string, Args&&... args) {
   using context =
       fmt::basic_printf_context<std::back_insert_iterator<nonstdstring>, char>;
   nonstdstring s;
   context(std::back_inserter(s), format_string,
-          fmt::make_format_args<context>(args...))
+          fmt::make_format_args<context>(std::forward<Args>(args)...))
       .format();
   return s;
 }

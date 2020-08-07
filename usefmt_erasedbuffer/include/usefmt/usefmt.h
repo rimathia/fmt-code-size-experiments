@@ -17,8 +17,9 @@ nonstdstring fmt(const S& format_string, const Args&... args);
 template <typename... Args>
 nonstdstring printf(fmt::string_view format_string, const Args&... args);
 
-using cont = fmt::basic_format_context<
-    std::back_insert_iterator<fmt::detail::buffer<char>>, char>;
+using cont =
+    fmt::basic_format_context<std::back_insert_iterator<fmt::memory_buffer>,
+                              char>;
 
 using printf_cont =
     fmt::basic_printf_context<std::back_insert_iterator<fmt::memory_buffer>,
@@ -38,7 +39,7 @@ nonstdstring usefmt::fmt(fmt::string_view format_string, const Args&... args) {
 
 template <typename S, typename... Args, typename>
 nonstdstring usefmt::fmt(const S& format_string, const Args&... args) {
-  fmt::internal::check_format_string<Args...>(format_string);
+  fmt::detail::check_format_string<Args...>(format_string);
   return usefmt::fmt(fmt::string_view(format_string), args...);
 }
 

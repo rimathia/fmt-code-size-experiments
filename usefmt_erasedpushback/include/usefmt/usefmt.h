@@ -37,7 +37,7 @@ nonstdstring usefmt::fmt(fmt::string_view format_string, const Args&... args) {
 
 template <typename S, typename... Args, typename>
 nonstdstring usefmt::fmt(const S& format_string, const Args&... args) {
-  fmt::internal::check_format_string<Args...>(format_string);
+  fmt::detail::check_format_string<Args...>(format_string);
   return usefmt::fmt(fmt::string_view(format_string), args...);
 }
 

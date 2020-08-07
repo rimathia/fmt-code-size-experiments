@@ -14,7 +14,9 @@ nonstdstring internal_vformat(
   } else {
     nonstdstring s;
     s.reserve(it_size.size);
-    fmt::vformat_to(std::back_inserter(s), format_string, format_args);
+    using af =
+        fmt::detail::arg_formatter<decltype(std::back_inserter(s)), char>;
+    fmt::vformat_to<af>(std::back_inserter(s), format_string, format_args);
     return s;
   }
 }

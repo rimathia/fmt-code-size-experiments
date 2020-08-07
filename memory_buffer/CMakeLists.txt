@@ -1,0 +1,4 @@
+add_library(memory_buffer INTERFACE)
+target_include_directories(memory_buffer INTERFACE include)
+
+add_subdirectory(test)

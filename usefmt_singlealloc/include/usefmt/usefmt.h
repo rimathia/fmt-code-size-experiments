@@ -24,8 +24,8 @@ using backit = std::back_insert_iterator<nonstdstring>;
 using BufferArray = std::array<char, 500>;
 
 using cont = fmt::basic_format_context<backit, char>;
-using truncated_cont = fmt::basic_format_context<
-    fmt::detail::truncating_iterator<BufferArray::iterator>, char>;
+using truncated_cont =
+    fmt::basic_format_context<fmt::detail::buffer_appender<char>, char>;
 
 using printf_cont = fmt::basic_printf_context<backit, char>;
 using truncated_printf_cont = fmt::basic_printf_context<
@@ -52,7 +52,7 @@ nonstdstring usefmt::fmt(fmt::string_view format_string, const Args&... args) {
 
 template <typename S, typename... Args, typename>
 nonstdstring usefmt::fmt(const S& format_string, const Args&... args) {
-  fmt::internal::check_format_string<Args...>(format_string);
+  fmt::detail::check_format_string<Args...>(format_string);
   return usefmt::fmt(fmt::string_view(format_string), args...);
 }
 
