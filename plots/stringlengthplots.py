@@ -5,6 +5,7 @@ import os
 import subprocess
 import matplotlib.pyplot as plt
 import shutil
+import sys
 
 BENCHMARK_GROUPS = {"default": ["erasedpushback", "erasedbuffer", "singlealloc", "originalfmt"], "bufsizes": [
     "buf32grow2", "buf512grow2", "buf1024grow2", "originalfmt"]}
@@ -88,9 +89,9 @@ if __name__ == "__main__":
             key = removeprefix(os.path.split(slbenchmark)
                                [-1], "stringlengthbenchmark_")
             results[key] = json.load(open(filename))
-        compilerversion = subprocess.check_output(
-            [compiler, "--version"]).splitlines()[0]
+        compilerversion = (subprocess.check_output(
+            [compiler, "--version"]).splitlines()[0]).decode(sys.stdout.encoding)
         plot_series(results, "fmt_longstring",
-                    title="{}".format(compilerversion), suffix=benchmarkgroup)
+                    title=compilerversion, suffix=benchmarkgroup)
         plot_series(results, "printf_longstring",
-                    title="{}".format(compilerversion), suffix=benchmarkgroup)
+                    title=compilerversion, suffix=benchmarkgroup)
