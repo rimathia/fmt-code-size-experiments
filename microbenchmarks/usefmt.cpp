@@ -4,7 +4,7 @@
 
 static void fmt_double(benchmark::State& state) {
   for (auto _ : state) {
-    usefmt::fmt("double: {:.6f}", 1.23456789);
+    usefmt::format("double: {:.6f}", 1.23456789);
   }
 }
 
@@ -13,7 +13,7 @@ BENCHMARK(fmt_double);
 static void fmt_longstring(benchmark::State& state) {
   std::string format_string = "{}" + std::string(state.range(0), ' ');
   for (auto _ : state) {
-    usefmt::fmt(format_string, "Hi");
+    usefmt::format(format_string, "Hi");
   }
 }
 

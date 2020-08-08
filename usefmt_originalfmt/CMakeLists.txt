@@ -1,0 +1,3 @@
+add_library(usefmt_originalfmt usefmt.cpp include/usefmt/usefmt.h)
+target_include_directories(usefmt_originalfmt PUBLIC include)
+target_link_libraries(usefmt_originalfmt PUBLIC fmt)

@@ -1,0 +1,5 @@
+add_library(usefmt_buf1024grow2 usefmt.cpp include/usefmt/usefmt.h)
+target_include_directories(usefmt_buf1024grow2 PUBLIC include)
+target_link_libraries(usefmt_buf1024grow2 PUBLIC fmt)
+target_link_libraries(usefmt_buf1024grow2 PUBLIC memory_buffer)
+target_link_libraries(usefmt_buf1024grow2 PUBLIC nonstdstring)

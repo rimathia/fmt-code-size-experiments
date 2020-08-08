@@ -3,6 +3,7 @@
 
 #include <fmt/format.h>
 #include <fmt/printf.h>
+#include <memory_buffer/memory_buffer.h>
 #include <nonstdstring/nonstdstring.h>
 
 namespace usefmt {
@@ -17,11 +18,12 @@ nonstdstring format(const S& format_string, const Args&... args);
 template <typename... Args>
 nonstdstring sprintf(fmt::string_view format_string, const Args&... args);
 
-using backit = std::back_insert_iterator<nonstdstring>;
+using buffer = membuf::memory_buffer<membuf::FactorTwo, 1024>;
 
-using cont = fmt::basic_format_context<backit, char>;
+using cont = fmt::basic_format_context<std::back_insert_iterator<buffer>, char>;
 
-using printf_cont = fmt::basic_printf_context<backit, char>;
+using printf_cont =
+    fmt::basic_printf_context<std::back_insert_iterator<buffer>, char>;
 
 nonstdstring internal_vformat(fmt::string_view format_string,
                               fmt::basic_format_args<cont> format_args);

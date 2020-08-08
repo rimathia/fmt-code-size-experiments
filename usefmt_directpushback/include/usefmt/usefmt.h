@@ -7,7 +7,7 @@
 
 namespace usefmt {
 template <typename... Args>
-nonstdstring fmt(fmt::string_view format_string, Args&&... args) {
+nonstdstring format(fmt::string_view format_string, Args&&... args) {
   nonstdstring s;
   fmt::format_to(std::back_inserter(s), format_string,
                  std::forward<Args>(args)...);
@@ -17,7 +17,7 @@ nonstdstring fmt(fmt::string_view format_string, Args&&... args) {
 template <
     typename S, typename... Args,
     typename = std::enable_if_t<std::is_base_of<fmt::compile_string, S>::value>>
-nonstdstring fmt(const S& format_string, Args&&... args) {
+nonstdstring format(const S& format_string, Args&&... args) {
   nonstdstring s;
   fmt::format_to(std::back_inserter(s), format_string,
                  std::forward<Args>(args)...);
@@ -25,7 +25,7 @@ nonstdstring fmt(const S& format_string, Args&&... args) {
 }
 
 template <typename... Args>
-nonstdstring printf(fmt::string_view format_string, Args&&... args) {
+nonstdstring sprintf(fmt::string_view format_string, Args&&... args) {
   using context =
       fmt::basic_printf_context<std::back_insert_iterator<nonstdstring>, char>;
   nonstdstring s;

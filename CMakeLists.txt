@@ -26,6 +26,7 @@ add_subdirectory(usefmt_buf1024grow2)
 add_subdirectory(usefmt_directpushback)
 add_subdirectory(usefmt_erasedbuffer)
 add_subdirectory(usefmt_erasedpushback)
+add_subdirectory(usefmt_originalfmt)
 add_subdirectory(usefmt_singlealloc)
 
 add_subdirectory(microbenchmarks)

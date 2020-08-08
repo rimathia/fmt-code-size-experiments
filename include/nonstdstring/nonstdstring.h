@@ -17,16 +17,17 @@ class nonstdstring : public std::vector<char> {
   explicit operator std::string() const;
 
   template <typename... Args>
-  static nonstdstring fmt(fmt::string_view format_string, const Args&... args);
+  static nonstdstring format(fmt::string_view format_string,
+                             const Args&... args);
 
   template <typename S, typename... Args,
             typename = std::enable_if_t<
                 std::is_base_of<fmt::compile_string, S>::value>>
-  static nonstdstring fmt(const S& format_string, const Args&... args);
+  static nonstdstring format(const S& format_string, const Args&... args);
 
   template <typename... Args>
-  static nonstdstring printf(fmt::string_view format_string,
-                             const Args&... args);
+  static nonstdstring sprintf(fmt::string_view format_string,
+                              const Args&... args);
 
   void reserve(std::size_t new_cap);
   void push_back(const char& value);

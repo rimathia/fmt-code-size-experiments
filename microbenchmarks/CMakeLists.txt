@@ -1,6 +1,9 @@
 add_executable(copybenchmark copy.cpp)
 target_link_libraries(copybenchmark benchmark::benchmark)
 
+add_executable(stringlengthbenchmark_originalfmt stringlength.cpp)
+target_link_libraries(stringlengthbenchmark_originalfmt benchmark::benchmark usefmt_originalfmt)
+
 add_executable(stringlengthbenchmark_buf32grow2 stringlength.cpp)
 target_link_libraries(stringlengthbenchmark_buf32grow2 benchmark::benchmark usefmt_buf32grow2)
 

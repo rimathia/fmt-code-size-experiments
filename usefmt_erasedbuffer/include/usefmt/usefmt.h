@@ -7,15 +7,15 @@
 
 namespace usefmt {
 template <typename... Args>
-nonstdstring fmt(fmt::string_view format_string, const Args&... args);
+nonstdstring format(fmt::string_view format_string, const Args&... args);
 
 template <
     typename S, typename... Args,
     typename = std::enable_if_t<std::is_base_of<fmt::compile_string, S>::value>>
-nonstdstring fmt(const S& format_string, const Args&... args);
+nonstdstring format(const S& format_string, const Args&... args);
 
 template <typename... Args>
-nonstdstring printf(fmt::string_view format_string, const Args&... args);
+nonstdstring sprintf(fmt::string_view format_string, const Args&... args);
 
 using cont =
     fmt::basic_format_context<std::back_insert_iterator<fmt::memory_buffer>,
@@ -33,19 +33,20 @@ nonstdstring internal_vprintf(fmt::string_view format_string,
 };  // namespace usefmt
 
 template <typename... Args>
-nonstdstring usefmt::fmt(fmt::string_view format_string, const Args&... args) {
+nonstdstring usefmt::format(fmt::string_view format_string,
+                            const Args&... args) {
   return internal_vformat(format_string, fmt::make_format_args<cont>(args...));
 }
 
 template <typename S, typename... Args, typename>
-nonstdstring usefmt::fmt(const S& format_string, const Args&... args) {
+nonstdstring usefmt::format(const S& format_string, const Args&... args) {
   fmt::detail::check_format_string<Args...>(format_string);
-  return usefmt::fmt(fmt::string_view(format_string), args...);
+  return usefmt::format(fmt::string_view(format_string), args...);
 }
 
 template <typename... Args>
-nonstdstring usefmt::printf(fmt::string_view format_string,
-                            const Args&... args) {
+nonstdstring usefmt::sprintf(fmt::string_view format_string,
+                             const Args&... args) {
   return internal_vprintf(format_string,
                           fmt::make_format_args<printf_cont>(args...));
 }
