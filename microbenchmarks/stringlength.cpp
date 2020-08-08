@@ -9,7 +9,14 @@ static void fmt_longstring(benchmark::State& state) {
   }
 }
 
-BENCHMARK(fmt_longstring)->RangeMultiplier(10)->Range(10, 10'000'000);
+BENCHMARK(fmt_longstring)
+    ->Arg(10)
+    ->Arg(33)
+    ->Arg(100)
+    ->Arg(333)
+    ->Arg(1000)
+    ->Arg(3333)
+    ->Arg(10000);
 
 static void printf_longstring(benchmark::State& state) {
   std::string format_string = "%s" + std::string(state.range(0), ' ');
@@ -18,6 +25,13 @@ static void printf_longstring(benchmark::State& state) {
   }
 }
 
-BENCHMARK(printf_longstring)->RangeMultiplier(10)->Range(10, 10'000'000);
+BENCHMARK(printf_longstring)
+    ->Arg(10)
+    ->Arg(33)
+    ->Arg(100)
+    ->Arg(333)
+    ->Arg(1000)
+    ->Arg(3333)
+    ->Arg(10000);
 
 BENCHMARK_MAIN();
