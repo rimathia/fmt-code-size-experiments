@@ -27,11 +27,16 @@ RUN make install
 
 ADD examples /partialcopy/examples
 ADD fmt /partialcopy/fmt
+ADD memory_buffer /partialcopy/memory_buffer
 ADD nonstdstring /partialcopy/nonstdstring
 ADD CMakeLists.txt /partialcopy/
+ADD usefmt_buf32grow2 /partialcopy/usefmt_buf32grow2
+ADD usefmt_buf512grow2 /partialcopy/usefmt_buf512grow2
+ADD usefmt_buf1024grow2 /partialcopy/usefmt_buf1024grow2
 ADD usefmt_directpushback /partialcopy/usefmt_directpushback
 ADD usefmt_erasedbuffer /partialcopy/usefmt_erasedbuffer
 ADD usefmt_erasedpushback /partialcopy/usefmt_erasedpushback
+ADD plots /partialcopy/plots
 ADD usefmt_singlealloc /partialcopy/usefmt_singlealloc
 
 ADD microbenchmarks /partialcopy/microbenchmarks
