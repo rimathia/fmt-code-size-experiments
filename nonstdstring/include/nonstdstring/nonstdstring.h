@@ -11,6 +11,7 @@ class nonstdstring : public std::vector<char> {
       : std::vector<char>(first, last) {}
   nonstdstring(const char* first, std::size_t n)
       : std::vector<char>(first, first + n) {}
+  nonstdstring(size_t count) : std::vector<char>(count) {}
 
   explicit operator std::string() const;
 

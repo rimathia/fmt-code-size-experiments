@@ -12,11 +12,9 @@ nonstdstring internal_vformat(
   if (it_size.size <= buffer.size()) {
     return nonstdstring(std::begin(buffer), it_size.out);
   } else {
-    nonstdstring s;
-    s.reserve(it_size.size);
-    using af =
-        fmt::detail::arg_formatter<decltype(std::back_inserter(s)), char>;
-    fmt::vformat_to<af>(std::back_inserter(s), format_string, format_args);
+    nonstdstring s(it_size.size);
+    using af = fmt::detail::arg_formatter<decltype(s.data()), char>;
+    fmt::vformat_to<af>(s.data(), format_string, format_args);
     return s;
   }
 }
@@ -35,9 +33,8 @@ nonstdstring internal_vprintf(
   if (truncit.count() <= buffer.size()) {
     return nonstdstring(std::begin(buffer), truncit.count());
   } else {
-    nonstdstring s;
-    s.reserve(truncit.count());
-    printf_cont(std::back_inserter(s), format_string, format_args).format();
+    nonstdstring s(truncit.count());
+    printf_cont(s.data(), format_string, format_args).format();
     return s;
   }
 }

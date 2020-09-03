@@ -19,15 +19,15 @@ nonstdstring format(const S& format_string, const Args&... args);
 template <typename... Args>
 nonstdstring sprintf(fmt::string_view format_string, const Args&... args);
 
-using backit = std::back_insert_iterator<nonstdstring>;
+// using backit = std::back_insert_iterator<nonstdstring>;
 
 using BufferArray = std::array<char, 500>;
 
-using cont = fmt::basic_format_context<backit, char>;
+using cont = fmt::basic_format_context<char*, char>;
 using truncated_cont =
     fmt::basic_format_context<fmt::detail::buffer_appender<char>, char>;
 
-using printf_cont = fmt::basic_printf_context<backit, char>;
+using printf_cont = fmt::basic_printf_context<char*, char>;
 using truncated_printf_cont = fmt::basic_printf_context<
     fmt::detail::truncating_iterator<BufferArray::iterator>, char>;
 

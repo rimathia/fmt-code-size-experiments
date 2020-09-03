@@ -36,6 +36,7 @@ ADD usefmt_buf1024grow2 /partialcopy/usefmt_buf1024grow2
 ADD usefmt_directpushback /partialcopy/usefmt_directpushback
 ADD usefmt_erasedbuffer /partialcopy/usefmt_erasedbuffer
 ADD usefmt_erasedpushback /partialcopy/usefmt_erasedpushback
+ADD usefmt_originalfmt /partialcopy/usefmt_originalfmt
 ADD plots /partialcopy/plots
 ADD usefmt_singlealloc /partialcopy/usefmt_singlealloc
 
