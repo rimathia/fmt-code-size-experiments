@@ -7,45 +7,25 @@
 
 namespace usefmt {
 template <typename... Args>
-nonstdstring format(fmt::string_view format_string, const Args&... args);
-
-template <
-    typename S, typename... Args,
-    typename = std::enable_if_t<std::is_base_of<fmt::compile_string, S>::value>>
-nonstdstring format(const S& format_string, const Args&... args);
-
-template <typename... Args>
-nonstdstring sprintf(fmt::string_view format_string, const Args&... args);
-
-using backit = std::back_insert_iterator<nonstdstring>;
-
-using cont = fmt::basic_format_context<backit, char>;
-
-using printf_cont = fmt::basic_printf_context<backit, char>;
-
-nonstdstring internal_vformat(fmt::string_view format_string,
-                              fmt::basic_format_args<cont> format_args);
-
-nonstdstring internal_vprintf(fmt::string_view format_string,
-                              fmt::basic_format_args<printf_cont> format_args);
-};  // namespace usefmt
-
-template <typename... Args>
-nonstdstring usefmt::format(fmt::string_view format_string,
-                            const Args&... args) {
-  return internal_vformat(format_string, fmt::make_format_args<cont>(args...));
-}
-
-template <typename S, typename... Args, typename>
-nonstdstring usefmt::format(const S& format_string, const Args&... args) {
-  fmt::detail::check_format_string<Args...>(format_string);
-  return usefmt::format(fmt::string_view(format_string), args...);
+nonstdstring format(fmt::v10::format_string<Args...> format_string,
+                    Args&&... args) {
+  nonstdstring s;
+  fmt::vformat_to(std::back_inserter(s), format_string,
+                  fmt::make_format_args(std::forward<Args>(args)...));
+  return s;
 }
 
 template <typename... Args>
-nonstdstring usefmt::sprintf(fmt::string_view format_string,
-                             const Args&... args) {
-  return internal_vprintf(format_string,
-                          fmt::make_format_args<printf_cont>(args...));
+nonstdstring sprintf(fmt::string_view format_string, Args&&... args) {
+  // from what I can see, there is no interface like vformat_to which would take
+  // a back_inserter
+  using context = fmt::v10::basic_printf_context_t<char>;
+  auto buf = fmt::v10::basic_memory_buffer<char>();
+  fmt::v10::detail::vprintf<char, context>(
+      buf, fmt::v10::detail::to_string_view(format_string),
+      fmt::make_format_args<context>(args...));
+  return nonstdstring(std::begin(buf), std::end(buf));
 }
+}  // namespace usefmt
+
 #endif

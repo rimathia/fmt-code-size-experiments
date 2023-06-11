@@ -1,23 +1,26 @@
 add_executable(fmtsyntax_directpushback fmtsyntax.cpp)
+set_property(TARGET fmtsyntax_directpushback PROPERTY CXX_STANDARD 20)
 target_link_libraries(fmtsyntax_directpushback usefmt_directpushback)
 
-add_executable(fmtsyntax_erasedbuffer fmtsyntax.cpp)
-target_link_libraries(fmtsyntax_erasedbuffer usefmt_erasedbuffer)
-
+#add_executable(fmtsyntax_erasedbuffer fmtsyntax.cpp)
+#target_link_libraries(fmtsyntax_erasedbuffer usefmt_erasedbuffer)
+#
 add_executable(fmtsyntax_erasedpushback fmtsyntax.cpp)
+set_property(TARGET fmtsyntax_erasedpushback PROPERTY CXX_STANDARD 20)
 target_link_libraries(fmtsyntax_erasedpushback usefmt_erasedpushback)
-
-add_executable(fmtsyntax_singlealloc fmtsyntax.cpp)
-target_link_libraries(fmtsyntax_singlealloc usefmt_singlealloc)
-
+#
+#add_executable(fmtsyntax_singlealloc fmtsyntax.cpp)
+#target_link_libraries(fmtsyntax_singlealloc usefmt_singlealloc)
+#
 add_executable(printfsyntax_directpushback printfsyntax.cpp)
 target_link_libraries(printfsyntax_directpushback usefmt_directpushback)
-
-add_executable(printfsyntax_erasedbuffer printfsyntax.cpp)
-target_link_libraries(printfsyntax_erasedbuffer usefmt_erasedbuffer )
-
-add_executable(printfsyntax_erasedpushback printfsyntax.cpp)
-target_link_libraries(printfsyntax_erasedpushback usefmt_erasedpushback)
-
-add_executable(printfsyntax_singlealloc printfsyntax.cpp)
-target_link_libraries(printfsyntax_singlealloc usefmt_singlealloc)
+target_link_libraries(fmtsyntax_directpushback usefmt_directpushback)
+#
+#add_executable(printfsyntax_erasedbuffer printfsyntax.cpp)
+#target_link_libraries(printfsyntax_erasedbuffer usefmt_erasedbuffer )
+#
+#add_executable(printfsyntax_erasedpushback printfsyntax.cpp)
+#target_link_libraries(printfsyntax_erasedpushback usefmt_erasedpushback)
+#
+#add_executable(printfsyntax_singlealloc printfsyntax.cpp)
+#target_link_libraries(printfsyntax_singlealloc usefmt_singlealloc)

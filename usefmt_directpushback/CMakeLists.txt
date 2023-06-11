@@ -1,4 +1,5 @@
 add_library(usefmt_directpushback usefmt.cpp include/usefmt/usefmt.h)
+set_property(TARGET usefmt_directpushback PROPERTY CXX_STANDARD 20)
 target_include_directories(usefmt_directpushback PUBLIC include)
 target_link_libraries(usefmt_directpushback PUBLIC fmt)
 target_link_libraries(usefmt_directpushback PUBLIC nonstdstring)

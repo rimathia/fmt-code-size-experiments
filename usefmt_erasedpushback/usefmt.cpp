@@ -1,20 +1,8 @@
 #include <usefmt/usefmt.h>
 
-namespace usefmt {
+#include <vector>
 
-nonstdstring internal_vformat(fmt::string_view format_string,
-                              fmt::basic_format_args<cont> format_args) {
-  nonstdstring s;
-  using af = fmt::detail::arg_formatter<typename cont::iterator, char>;
-  fmt::vformat_to<af>(std::back_inserter(s), format_string, format_args);
-  return s;
-}
+using backit = std::back_insert_iterator<std::vector<char>>;
 
-nonstdstring internal_vprintf(fmt::string_view format_string,
-                              fmt::basic_format_args<printf_cont> format_args) {
-  nonstdstring s;
-  printf_cont(std::back_inserter(s), format_string, format_args).format();
-  return s;
-}
-
-}  // namespace usefmt
+template backit fmt::vformat_to<backit>(backit, fmt::string_view,
+                                        fmt::format_args);

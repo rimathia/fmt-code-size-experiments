@@ -31,5 +31,3 @@ add_subdirectory(usefmt_singlealloc)
 
 add_subdirectory(microbenchmarks)
 add_subdirectory(examples)
-
-add_subdirectory(plots)
